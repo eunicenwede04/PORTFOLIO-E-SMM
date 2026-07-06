@@ -800,19 +800,22 @@ section.pad {
 
 .media-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
 }
 @media (max-width: 900px) {
   .media-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 }
 .media-card {
   background: var(--white);
+  color: var(--navy-deep);
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(27, 42, 74, 0.06);
   transition:
     transform 0.35s var(--ease),
     box-shadow 0.35s var(--ease);
@@ -823,7 +826,8 @@ section.pad {
 }
 .media-thumb {
   position: relative;
-  aspect-ratio: 0/0;
+  aspect-ratio: 4 / 3;
+  min-height: 220px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--cream-warm), var(--blush) 120%);
   display: flex;
@@ -836,6 +840,7 @@ section.pad {
   height: 100%;
   object-fit: cover;
   display: block;
+  background-color: var(--white);
 }
 .media-thumb.video {
   background: linear-gradient(135deg, #141e41, #1a294b);
@@ -1536,6 +1541,20 @@ footer {
   }
 }
 @media (max-width: 760px) {
+  #my-work,
+  #portfolio {
+    background: var(--cream) !important;
+  }
+  .media-card {
+    background: var(--cream);
+    border: 1px solid rgba(27, 42, 74, 0.12);
+  }
+  .media-copy {
+    background: var(--cream);
+  }
+  .media-thumb {
+    min-height: 220px;
+  }
   .nav-links {
     position: fixed;
     top: 72px;
