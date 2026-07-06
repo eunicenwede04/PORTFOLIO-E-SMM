@@ -32,12 +32,36 @@ function setupMobileNav() {
 
   if (!navToggle || !navLinks) return;
 
-  navToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-  });
+  const toggleMenu = () => {
+    const isOpen = navLinks.classList.toggle("open");
+    document.body.classList.toggle("menu-open", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  };
+
+  navToggle.addEventListener("click", toggleMenu);
 
   navLinks.querySelectorAll("a").forEach((anchor) => {
-    anchor.addEventListener("click", () => navLinks.classList.remove("open"));
+    anchor.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      document.body.classList.remove("menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 760) {
+      navLinks.classList.remove("open");
+      document.body.classList.remove("menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      navLinks.classList.remove("open");
+      document.body.classList.remove("menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
   });
 }
 
